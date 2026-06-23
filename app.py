@@ -28,8 +28,27 @@ if "api_key" not in st.session_state:
 
 def generate_ai(prompt):
     if not st.session_state.api_key:
-        st.error("Masukkan Gemini API Key dulu di Settings.")
-        return ""
+        return """
+HASIL DEMO CONTENT FACTORY AI
+
+JUDUL:
+Contoh Judul Konten AI
+
+HOOK:
+Ini adalah contoh hasil demo tanpa API.
+
+NARASI:
+Aplikasi tetap bisa dicoba meskipun API belum aktif.
+
+PROMPT VIDEO:
+Gunakan gambar referensi utama. Pertahankan wajah, pakaian, warna, bentuk, dan detail tetap sama. Gerakan natural, cinematic, realistis.
+
+NEGATIVE PROMPT:
+no face change, no clothes change, no product changes, no blur, no watermark, no deformation
+
+HASHTAG:
+#AIContent #VideoAI #ContentFactoryAI
+"""
 
     try:
         genai.configure(api_key=st.session_state.api_key)
@@ -37,8 +56,13 @@ def generate_ai(prompt):
         response = model.generate_content(prompt)
         return response.text
     except Exception:
-        st.error("Gagal generate. Kemungkinan quota Gemini API limit atau API Key bermasalah.")
-        return ""
+        return """
+API ERROR - MODE DEMO AKTIF
+
+Gemini API masih error atau quota limit.
+
+Aplikasi tetap berjalan dalam mode demo.
+"""
 
 def result_section(title, content, key):
     st.markdown(f"### {title}")
